@@ -3,10 +3,10 @@ const axios = require("axios");
 
 function getLatestArticles(req, res){
     axios
-    .get("https://newsdata.io/api/1/news?apiKey=" + secrets.apiKey)
+    .get("https://newsapi.org/v2/top-headlines?country=us&apiKey=" + secrets.apiKey)
     .then(response => {
-        console.log(response);
-        res.send(response["results"]);
+        articles = response["data"]["articles"];
+        res.status(200).send({"articles": articles});
     })
     .catch(error => {
         console.error(error);
